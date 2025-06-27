@@ -1,0 +1,18 @@
+﻿{
+  "name": "maintenance-platform",
+  "version": "1.0.0",
+  "description": "Plateforme de maintenance industrielle",
+  "private": true,
+  "workspaces": [
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "install:frontend": "cd frontend && npm install",
+    "test": "cd frontend && npm run test"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}

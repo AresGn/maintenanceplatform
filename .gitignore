@@ -1,0 +1,60 @@
+﻿# Plateforme de Maintenance Industrielle
+
+## Description
+Plateforme numÃ©rique centralisÃ©e de gestion de maintenance industrielle.
+
+## Stack Technologique
+- Frontend: React 18+ avec TypeScript
+- Backend: Python avec FastAPI
+- Base de donnÃ©es: PostgreSQL
+
+## Installation
+
+1. ExÃ©cutez ce script PowerShell pour l'installation initiale
+2. Configurez vos variables d'environnement
+3. Lancez `npm run dev` pour le dÃ©veloppement
+
+## Structure
+`
+maintenance-platform/
+â”œâ”€â”€ frontend/          # Application React
+â”œâ”€â”€ backend/           # API FastAPI
+â”œâ”€â”€ shared/            # Types partagÃ©s
+â””â”€â”€ docs/              # Documentation
+`
+"@ | Out-File -FilePath "README.md" -Encoding UTF8
+
+# .gitignore
+@"
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+venv/
+
+# Build outputs
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite
