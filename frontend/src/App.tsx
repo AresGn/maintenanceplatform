@@ -1,39 +1,85 @@
 ﻿
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { ConfigProvider } from 'antd';
+import { ToastContainer } from 'react-toastify';
+import frFR from 'antd/locale/fr_FR';
+
+// Contexts
+import { AuthProvider } from './contexts/AuthContext';
+
+// Components
+import { ProtectedRoute } from './components/auth/ProtectedRoute';
+import { PublicRoute } from './components/auth/PublicRoute';
+
+// Pages
+import { LoginPage } from './pages/LoginPage';
+import { RegisterPage } from './pages/RegisterPage';
+import { DashboardPage } from './pages/DashboardPage';
+
+// Styles
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <div style={{
-      padding: '20px',
-      textAlign: 'center',
-      minHeight: '100vh',
-      backgroundColor: '#f0f2f5',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center'
-    }}>
-      <h1 style={{ color: '#1890ff', marginBottom: '20px' }}>
-        🔧 Plateforme de Maintenance Industrielle
-      </h1>
-      <p style={{ fontSize: '18px', color: '#666' }}>
-        Bienvenue sur votre plateforme de maintenance
-      </p>
-      <div style={{
-        marginTop: '30px',
-        padding: '20px',
-        backgroundColor: 'white',
-        borderRadius: '8px',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-      }}>
-        <p style={{ color: '#52c41a', fontWeight: 'bold' }}>
-          ✅ Serveur Frontend Opérationnel
-        </p>
-        <p style={{ marginTop: '10px', color: '#666' }}>
-          Prêt pour l'implémentation de l'authentification
-        </p>
-      </div>
-    </div>
-  )
+    <ConfigProvider locale={frFR}>
+      <AuthProvider>
+        <Router>
+          <div className="App">
+            <Routes>
+              {/* Routes publiques */}
+              <Route
+                path="/login"
+                element={
+                  <PublicRoute>
+                    <LoginPage />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <PublicRoute>
+                    <RegisterPage />
+                  </PublicRoute>
+                }
+              />
+
+              {/* Routes protégées */}
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <DashboardPage />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Redirection par défaut */}
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
+              {/* Route 404 */}
+              <Route path="*" element={<Navigate to="/dashboard" replace />} />
+            </Routes>
+
+            {/* Notifications toast */}
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
+          </div>
+        </Router>
+      </AuthProvider>
+    </ConfigProvider>
+  );
 }
 
-export default App
+export default App;
