@@ -7,10 +7,16 @@
     "frontend"
   ],
   "scripts": {
-    "dev": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000",
     "build": "cd frontend && npm run build",
     "install:frontend": "cd frontend && npm install",
-    "test": "cd frontend && npm run test"
+    "install:all": "npm install && cd frontend && npm install",
+    "test": "cd frontend && npm run test",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:frontend": "cd frontend && npm run preview",
+    "start:backend": "cd backend && python -m uvicorn app.main:app --host 0.0.0.0 --port 8000"
   },
   "devDependencies": {
     "concurrently": "^7.6.0"

@@ -16,6 +16,8 @@ import { PublicRoute } from './components/auth/PublicRoute';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { DashboardPage } from './pages/DashboardPage';
+import { AdminDashboard, SupervisorDashboard, TechnicianDashboard } from './pages/dashboard';
+import { RoleBasedRedirect } from './components/dashboard/RoleBasedRedirect';
 
 // Styles
 import 'react-toastify/dist/ReactToastify.css';
@@ -50,7 +52,31 @@ function App() {
                 path="/dashboard"
                 element={
                   <ProtectedRoute>
-                    <DashboardPage />
+                    <RoleBasedRedirect />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dashboard/admin"
+                element={
+                  <ProtectedRoute requiredRoles={['admin']}>
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dashboard/supervisor"
+                element={
+                  <ProtectedRoute requiredRoles={['supervisor']}>
+                    <SupervisorDashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dashboard/technician"
+                element={
+                  <ProtectedRoute requiredRoles={['technician']}>
+                    <TechnicianDashboard />
                   </ProtectedRoute>
                 }
               />

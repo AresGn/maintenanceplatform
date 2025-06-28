@@ -4,7 +4,51 @@ import { API_CONFIG } from '../config/api';
 import { LoginRequest, RegisterRequest, AuthResponse, User } from '../types/auth';
 import { storage } from '../utils/storage';
 
+// Interface pour les données utilisateur du backend (snake_case)
+interface BackendUser {
+  id: number;
+  username: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  role: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+interface BackendAuthResponse {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  user: BackendUser;
+}
+
 class AuthService {
+  // Transformer les données utilisateur du backend vers le frontend
+  private transformUser(backendUser: BackendUser): User {
+    return {
+      id: backendUser.id,
+      username: backendUser.username,
+      email: backendUser.email,
+      firstName: backendUser.first_name,
+      lastName: backendUser.last_name,
+      role: backendUser.role as 'admin' | 'supervisor' | 'technician',
+      isActive: backendUser.is_active,
+      createdAt: backendUser.created_at,
+      updatedAt: backendUser.updated_at
+    };
+  }
+
+  // Transformer la réponse d'authentification
+  private transformAuthResponse(backendResponse: BackendAuthResponse): AuthResponse {
+    return {
+      access_token: backendResponse.access_token,
+      token_type: backendResponse.token_type,
+      expires_in: backendResponse.expires_in,
+      user: this.transformUser(backendResponse.user)
+    };
+  }
   // Connexion
   async login(credentials: LoginRequest): Promise<AuthResponse> {
     try {
@@ -13,10 +57,13 @@ class AuthService {
       formData.append('username', credentials.username);
       formData.append('password', credentials.password);
 
-      const response = await apiService.postFormData<AuthResponse>(
+      const backendResponse = await apiService.postFormData<BackendAuthResponse>(
         API_CONFIG.ENDPOINTS.AUTH.LOGIN,
         formData
       );
+
+      // Transformer la réponse du backend
+      const response = this.transformAuthResponse(backendResponse);
 
       // Stocker le token et les données utilisateur
       if (response.access_token) {
@@ -34,10 +81,23 @@ class AuthService {
   // Inscription
   async register(userData: RegisterRequest): Promise<AuthResponse> {
     try {
-      const response = await apiService.post<AuthResponse>(
+      // Transformer les données pour le backend (camelCase vers snake_case)
+      const backendUserData = {
+        username: userData.username,
+        email: userData.email,
+        password: userData.password,
+        first_name: userData.firstName,
+        last_name: userData.lastName,
+        role: userData.role
+      };
+
+      const backendResponse = await apiService.post<BackendAuthResponse>(
         API_CONFIG.ENDPOINTS.AUTH.REGISTER,
-        userData
+        backendUserData
       );
+
+      // Transformer la réponse du backend
+      const response = this.transformAuthResponse(backendResponse);
 
       // Stocker le token et les données utilisateur
       if (response.access_token) {
@@ -69,9 +129,10 @@ class AuthService {
   // Obtenir les informations de l'utilisateur actuel
   async getCurrentUser(): Promise<User> {
     try {
-      const response = await apiService.get<User>(API_CONFIG.ENDPOINTS.AUTH.ME);
-      storage.setUserData(response);
-      return response;
+      const backendResponse = await apiService.get<BackendUser>(API_CONFIG.ENDPOINTS.AUTH.ME);
+      const user = this.transformUser(backendResponse);
+      storage.setUserData(user);
+      return user;
     } catch (error: any) {
       const errorMessage = error.response?.data?.detail || 'Erreur lors de la récupération des données utilisateur';
       throw new Error(errorMessage);
