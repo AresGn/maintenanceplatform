@@ -29,6 +29,10 @@ app.include_router(sites_router, prefix="/api/v1/sites", tags=["sites"])
 app.include_router(production_lines_router, prefix="/api/v1/production-lines", tags=["production-lines"])
 app.include_router(equipment_router, prefix="/api/v1/equipment", tags=["equipment"])
 
+# Inclure les routes pour la maintenance
+from app.api.v1.maintenance import router as maintenance_router
+app.include_router(maintenance_router, prefix="/api/v1/maintenance", tags=["maintenance"])
+
 @app.get("/")
 async def root():
     return {"message": "API Maintenance Platform"}

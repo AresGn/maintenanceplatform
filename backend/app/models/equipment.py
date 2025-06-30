@@ -23,6 +23,9 @@ class Equipment(BaseModel):
     # Relations
     site = relationship("Site", back_populates="equipment")
     production_line = relationship("ProductionLine", back_populates="equipment")
+    maintenance_plans = relationship("MaintenancePlan", back_populates="equipment")
+    scheduled_maintenances = relationship("ScheduledMaintenance", back_populates="equipment")
+    interventions = relationship("MaintenanceIntervention", back_populates="equipment")
     
     def __repr__(self):
         return f"<Equipment(id={self.id}, name='{self.name}', status='{self.status}', criticality='{self.criticality}')>"

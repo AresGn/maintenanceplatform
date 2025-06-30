@@ -67,9 +67,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onCollapse }) => {
           icon: <CalendarOutlined />,
           label: 'Maintenance',
           children: [
-            { key: 'maintenance-schedule', label: 'Planification' },
+            { key: 'maintenance-calendar', label: 'Calendrier' },
+            { key: 'maintenance-planning', label: 'Planification' },
+            { key: 'maintenance-interventions', label: 'Interventions' },
             { key: 'maintenance-history', label: 'Historique' },
-            { key: 'maintenance-templates', label: 'Modèles' },
           ],
         },
         {
@@ -133,9 +134,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onCollapse }) => {
           icon: <CalendarOutlined />,
           label: 'Maintenance',
           children: [
-            { key: 'maintenance-schedule', label: 'Planification' },
+            { key: 'maintenance-calendar', label: 'Calendrier' },
+            { key: 'maintenance-planning', label: 'Planification' },
+            { key: 'maintenance-interventions', label: 'Interventions' },
             { key: 'maintenance-validate', label: 'Validation' },
-            { key: 'maintenance-history', label: 'Historique' },
           ],
         },
         {
@@ -204,7 +206,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onCollapse }) => {
       'equipment-list': '/equipments',
       'equipment-add': '/equipments/new',
       'equipment-categories': '/equipments/categories', // TODO: À implémenter
-      // Ajouter d'autres routes au fur et à mesure
+      'maintenance-calendar': '/maintenance/calendar',
+      'maintenance-planning': '/maintenance/planning',
+      'maintenance-interventions': '/maintenance/interventions',
+      'maintenance-history': '/maintenance/history', // TODO: À implémenter
+      'maintenance-validate': '/maintenance/validate', // TODO: À implémenter
     };
 
     const route = routeMap[e.key];
@@ -221,6 +227,18 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onCollapse }) => {
     }
     if (path.startsWith('/equipments')) {
       return ['equipment-list'];
+    }
+    if (path === '/maintenance/calendar') {
+      return ['maintenance-calendar'];
+    }
+    if (path === '/maintenance/planning') {
+      return ['maintenance-planning'];
+    }
+    if (path.startsWith('/maintenance/interventions')) {
+      return ['maintenance-interventions'];
+    }
+    if (path.startsWith('/maintenance')) {
+      return ['maintenance-calendar'];
     }
     if (path.includes('/dashboard')) {
       return ['dashboard'];

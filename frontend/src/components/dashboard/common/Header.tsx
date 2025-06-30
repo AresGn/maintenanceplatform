@@ -13,11 +13,13 @@ const { Header: AntHeader } = Layout;
 const { Title, Text } = Typography;
 
 interface DashboardHeaderProps {
-  title: string;
+  title?: string;
   subtitle?: string;
+  collapsed?: boolean;
+  onCollapse?: (collapsed: boolean) => void;
 }
 
-export const Header: React.FC<DashboardHeaderProps> = ({ title, subtitle }) => {
+export const Header: React.FC<DashboardHeaderProps> = ({ title, subtitle, collapsed, onCollapse }) => {
   const { user, logout } = useAuth();
 
   const handleLogout = async () => {

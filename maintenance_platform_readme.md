@@ -1,5 +1,5 @@
 # Plateforme de Gestion de Maintenance
-
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ## Vue d'ensemble du projet
 
 Cette plateforme numérique centralisée permet de gérer efficacement les interventions de maintenance (préventive, corrective, prédictive), les équipements, les pièces de rechange et fournit des outils d'analyse de performance pour optimiser la maintenance industrielle.
