@@ -203,6 +203,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onCollapse }) => {
       'dashboard': `/dashboard/${user?.role}`,
       'equipment-list': '/equipments',
       'equipment-add': '/equipments/new',
+      'equipment-categories': '/equipments/categories', // TODO: À implémenter
       // Ajouter d'autres routes au fur et à mesure
     };
 
@@ -215,6 +216,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onCollapse }) => {
   // Déterminer la clé sélectionnée basée sur l'URL actuelle
   const getSelectedKey = () => {
     const path = location.pathname;
+    if (path === '/equipments/new') {
+      return ['equipment-add'];
+    }
     if (path.startsWith('/equipments')) {
       return ['equipment-list'];
     }
