@@ -2,6 +2,9 @@
 from fastapi.middleware.cors import CORSMiddleware
 from .core.config import settings
 from .api.auth import router as auth_router
+from .api.sites import router as sites_router
+from .api.production_lines import router as production_lines_router
+from .api.equipment import router as equipment_router
 
 app = FastAPI(
     title="Maintenance Platform API",
@@ -20,6 +23,11 @@ app.add_middleware(
 
 # Inclure les routes d'authentification
 app.include_router(auth_router, prefix="/auth", tags=["authentication"])
+
+# Inclure les routes pour les équipements
+app.include_router(sites_router, prefix="/api/v1/sites", tags=["sites"])
+app.include_router(production_lines_router, prefix="/api/v1/production-lines", tags=["production-lines"])
+app.include_router(equipment_router, prefix="/api/v1/equipment", tags=["equipment"])
 
 @app.get("/")
 async def root():

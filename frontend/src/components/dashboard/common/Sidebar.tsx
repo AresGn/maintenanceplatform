@@ -1,7 +1,8 @@
 // Sidebar du tableau de bord
 import React, { useState } from 'react';
 import { Layout, Menu, Button } from 'antd';
-import { 
+import { useNavigate, useLocation } from 'react-router-dom';
+import {
   DashboardOutlined,
   ToolOutlined,
   CalendarOutlined,
@@ -25,6 +26,8 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onCollapse }) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isMobile, setIsMobile] = React.useState(false);
 
   React.useEffect(() => {
@@ -195,6 +198,32 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onCollapse }) => {
     ];
   };
 
+  const handleMenuClick = (e: { key: string }) => {
+    const routeMap: { [key: string]: string } = {
+      'dashboard': `/dashboard/${user?.role}`,
+      'equipment-list': '/equipments',
+      'equipment-add': '/equipments/new',
+      // Ajouter d'autres routes au fur et à mesure
+    };
+
+    const route = routeMap[e.key];
+    if (route) {
+      navigate(route);
+    }
+  };
+
+  // Déterminer la clé sélectionnée basée sur l'URL actuelle
+  const getSelectedKey = () => {
+    const path = location.pathname;
+    if (path.startsWith('/equipments')) {
+      return ['equipment-list'];
+    }
+    if (path.includes('/dashboard')) {
+      return ['dashboard'];
+    }
+    return ['dashboard'];
+  };
+
   return (
     <Sider
       trigger={null}
@@ -231,9 +260,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onCollapse }) => {
       
       <Menu
         mode="inline"
-        defaultSelectedKeys={['dashboard']}
-        style={{ 
-          height: 'calc(100% - 96px)', 
+        selectedKeys={getSelectedKey()}
+        onClick={handleMenuClick}
+        style={{
+          height: 'calc(100% - 96px)',
           borderRight: 0,
           paddingTop: '8px'
         }}

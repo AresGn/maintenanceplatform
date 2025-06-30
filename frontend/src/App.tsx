@@ -18,6 +18,8 @@ import { RegisterPage } from './pages/RegisterPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { AdminDashboard, SupervisorDashboard, TechnicianDashboard } from './pages/dashboard';
 import { RoleBasedRedirect } from './components/dashboard/RoleBasedRedirect';
+import EquipmentListPage from './pages/EquipmentListPage';
+import EquipmentDetailPage from './pages/EquipmentDetailPage';
 
 // Styles
 import 'react-toastify/dist/ReactToastify.css';
@@ -77,6 +79,24 @@ function App() {
                 element={
                   <ProtectedRoute requiredRoles={['technician']}>
                     <TechnicianDashboard />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Routes des équipements */}
+              <Route
+                path="/equipments"
+                element={
+                  <ProtectedRoute>
+                    <EquipmentListPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/equipments/:id"
+                element={
+                  <ProtectedRoute>
+                    <EquipmentDetailPage />
                   </ProtectedRoute>
                 }
               />
