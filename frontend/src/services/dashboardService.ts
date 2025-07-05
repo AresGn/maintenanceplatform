@@ -137,13 +137,13 @@ class DashboardService {
   }
 
   // Récupérer les statistiques
-  async getStats(role: string): Promise<DashboardStats> {
+  async getStats(_role: string): Promise<DashboardStats> {
     await this.delay(300);
     return this.mockStats;
   }
 
   // Récupérer les alertes
-  async getAlerts(role: string): Promise<AlertItem[]> {
+  async getAlerts(_role: string): Promise<AlertItem[]> {
     await this.delay(200);
     return this.mockAlerts;
   }

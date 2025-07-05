@@ -9,12 +9,12 @@ import {
 } from 'antd';
 import { 
   PlusOutlined,
-  ArrowLeftOutlined 
+  // ArrowLeftOutlined
 } from '@ant-design/icons';
 import { DashboardLayout } from '../components/dashboard/common';
 import { EquipmentForm } from '../components/equipment';
 import { equipmentService } from '../services/equipmentService';
-import { EquipmentCreate } from '../types/equipment';
+import { EquipmentCreate, EquipmentUpdate } from '../types/equipment';
 
 const { Title } = Typography;
 
@@ -22,10 +22,10 @@ const EquipmentCreatePage: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (data: EquipmentCreate) => {
+  const handleSubmit = async (data: EquipmentCreate | EquipmentUpdate) => {
     try {
       setLoading(true);
-      const newEquipment = await equipmentService.createEquipment(data);
+      const newEquipment = await equipmentService.createEquipment(data as EquipmentCreate);
       
       message.success('Équipement créé avec succès');
       

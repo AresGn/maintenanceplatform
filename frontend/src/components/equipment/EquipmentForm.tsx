@@ -34,7 +34,7 @@ import {
 import dayjs from 'dayjs';
 
 const { Option } = Select;
-const { TextArea } = Input;
+// const { TextArea } = Input;
 const { Text } = Typography;
 
 interface EquipmentFormProps {

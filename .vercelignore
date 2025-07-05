@@ -1,0 +1,17 @@
+backend/
+node_modules/
+frontend/node_modules/
+*.log
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.DS_Store
+Thumbs.db
+*.bat
+*.ps1
+Tasks_*.md
+COMMIT_MESSAGE.md
+maintenance_platform_guide.md
+maintenance_platform_readme.md

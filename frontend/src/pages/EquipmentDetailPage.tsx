@@ -1,6 +1,6 @@
 // Page de détail d'un équipement
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import {
   Card,
   Row,
@@ -14,12 +14,12 @@ import {
   Spin,
   Alert,
   Empty,
-  Divider
+  // Divider
 } from 'antd';
 import {
   EditOutlined,
   CalendarOutlined,
-  ArrowLeftOutlined,
+  // ArrowLeftOutlined,
   ToolOutlined,
   HistoryOutlined,
   ScheduleOutlined
@@ -36,7 +36,7 @@ const { Title, Text } = Typography;
 
 const EquipmentDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [equipment, setEquipment] = useState<EquipmentWithRelations | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

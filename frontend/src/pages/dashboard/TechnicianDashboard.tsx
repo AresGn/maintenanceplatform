@@ -1,12 +1,12 @@
 // Tableau de bord technicien
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Card, Typography, Space, Button, List, Tag, Timeline, Calendar } from 'antd';
+import { Row, Col, Card, Typography, Space, Button, List, Tag, Timeline } from 'antd';
 import { 
   CalendarOutlined, 
   ToolOutlined, 
   CheckCircleOutlined, 
   ClockCircleOutlined,
-  AlertOutlined,
+  // AlertOutlined,
   FileTextOutlined,
   PlayCircleOutlined,
   PauseCircleOutlined
@@ -16,7 +16,7 @@ import { dashboardService } from '../../services/dashboardService';
 import { DashboardData, TaskItem } from '../../types/dashboard';
 import { useAuth } from '../../contexts/AuthContext';
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 
 export const TechnicianDashboard: React.FC = () => {
   const { user } = useAuth();

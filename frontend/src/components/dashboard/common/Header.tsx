@@ -19,7 +19,7 @@ interface DashboardHeaderProps {
   onCollapse?: (collapsed: boolean) => void;
 }
 
-export const Header: React.FC<DashboardHeaderProps> = ({ title, subtitle, collapsed, onCollapse }) => {
+export const Header: React.FC<DashboardHeaderProps> = ({ title, subtitle }) => {
   const { user, logout } = useAuth();
 
   const handleLogout = async () => {

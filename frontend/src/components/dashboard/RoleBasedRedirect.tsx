@@ -1,5 +1,5 @@
 // Composant de redirection basé sur les rôles
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { Spin } from 'antd';
 import { useAuth } from '../../contexts/AuthContext';

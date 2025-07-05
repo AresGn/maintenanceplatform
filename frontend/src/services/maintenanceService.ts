@@ -24,7 +24,10 @@ class MaintenanceService {
     
     if (filters) {
       Object.entries(filters).forEach(([key, value]) => {
-        if (value !== undefined && value !== null && value !== '' && value !== 0) {
+        if (value !== undefined && value !== null &&
+            (typeof value === 'string' ? value !== '' :
+             typeof value === 'number' ? value !== 0 :
+             typeof value === 'boolean' ? value !== false : true)) {
           params.append(key, value.toString());
         }
       });

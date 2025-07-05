@@ -39,7 +39,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   disabled = false
 }) => {
   const [uploading, setUploading] = useState(false);
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const [fileList] = useState<UploadFile[]>([]);
 
   const handleUpload = async (file: File): Promise<boolean> => {
     // Validation du fichier

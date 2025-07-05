@@ -12,7 +12,7 @@ import {
 } from 'antd';
 import { 
   EditOutlined,
-  ArrowLeftOutlined 
+  // ArrowLeftOutlined
 } from '@ant-design/icons';
 import { DashboardLayout } from '../components/dashboard/common';
 import { EquipmentForm } from '../components/equipment';
@@ -58,7 +58,7 @@ const EquipmentEditPage: React.FC = () => {
 
     try {
       setSubmitting(true);
-      const updatedEquipment = await equipmentService.updateEquipment(equipment.id, data);
+      await equipmentService.updateEquipment(equipment.id, data);
       
       message.success('Équipement mis à jour avec succès');
       
