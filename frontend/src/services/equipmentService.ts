@@ -15,7 +15,7 @@ class EquipmentService {
   // Équipements
   async getEquipments(filters?: EquipmentFilter & { skip?: number; limit?: number }) {
     const params = new URLSearchParams();
-    
+
     if (filters) {
       Object.entries(filters).forEach(([key, value]) => {
         if (value !== undefined && value !== null && value !== '') {
@@ -23,28 +23,28 @@ class EquipmentService {
         }
       });
     }
-    
-    const response = await apiService.get(`/api/v1/equipment?${params.toString()}`);
+
+    const response = await apiService.get(`/api/equipment?${params.toString()}`);
     return response as Equipment[];
   }
 
   async getEquipment(id: number) {
-    const response = await apiService.get(`/api/v1/equipment/${id}`);
+    const response = await apiService.get(`/api/equipment/${id}`);
     return response as EquipmentWithRelations;
   }
 
   async createEquipment(data: EquipmentCreate) {
-    const response = await apiService.post('/api/v1/equipment', data);
+    const response = await apiService.post('/api/equipment', data);
     return response as Equipment;
   }
 
   async updateEquipment(id: number, data: EquipmentUpdate) {
-    const response = await apiService.put(`/api/v1/equipment/${id}`, data);
+    const response = await apiService.put(`/api/equipment/${id}`, data);
     return response as Equipment;
   }
 
   async deleteEquipment(id: number) {
-    await apiService.delete(`/api/v1/equipment/${id}`);
+    await apiService.delete(`/api/equipment/${id}`);
   }
 
   async getEquipmentStats() {

@@ -19,9 +19,11 @@ export const API_CONFIG = {
       ME: '/api/auth/me'
     },
     USERS: '/users',
-    EQUIPMENT: '/equipment',
+    EQUIPMENT: '/api/equipment',
     MAINTENANCE: '/maintenance',
-    INVENTORY: '/inventory'
+    INVENTORY: '/inventory',
+    DASHBOARD: '/api/dashboard',
+    SITES: '/api/sites'
   },
   TIMEOUT: 10000,
   RETRY_ATTEMPTS: 3

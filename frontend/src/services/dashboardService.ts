@@ -1,5 +1,7 @@
 // Service pour les données du tableau de bord
 import { DashboardData, DashboardStats, AlertItem, TaskItem, TeamMember } from '../types/dashboard';
+import { apiService } from './api';
+import { API_CONFIG } from '../config/api';
 
 class DashboardService {
   // Données mockées pour le développement
@@ -96,11 +98,21 @@ class DashboardService {
 
   // Récupérer les données du tableau de bord selon le rôle
   async getDashboardData(role: string): Promise<DashboardData> {
-    await this.delay(500); // Simuler un appel API
+    try {
+      // Récupérer les vraies statistiques depuis l'API
+      const stats = await apiService.get(`${API_CONFIG.ENDPOINTS.DASHBOARD}/stats`);
 
-    const baseData: DashboardData = {
-      stats: this.mockStats,
-      alerts: this.mockAlerts,
+      const baseData: DashboardData = {
+        stats: {
+          equipments: stats.total_equipment || 0,
+          maintenances: stats.pending_maintenances || 0,
+          alerts: 3, // TODO: implémenter dans l'API
+          interventions: stats.completed_maintenances || 0,
+          availability: 94.5, // TODO: calculer depuis l'API
+          mtbf: 720, // TODO: calculer depuis l'API
+          mttr: 2.5 // TODO: calculer depuis l'API
+        },
+        alerts: this.mockAlerts, // TODO: récupérer depuis l'API
       tasks: this.mockTasks
     };
 
@@ -134,7 +146,28 @@ class DashboardService {
       default:
         return baseData;
     }
+  } catch (error) {
+    console.warn('Erreur lors de la récupération des données dashboard, utilisation des données de test:', error);
+    // Fallback vers les données mockées
+    const baseData: DashboardData = {
+      stats: this.mockStats,
+      alerts: this.mockAlerts,
+      tasks: this.mockTasks
+    };
+
+    // Adapter les données selon le rôle (même logique que ci-dessus)
+    switch (role) {
+      case 'admin':
+        return { ...baseData, teamMembers: this.mockTeamMembers };
+      case 'supervisor':
+        return { ...baseData, teamMembers: this.mockTeamMembers, tasks: this.mockTasks.filter(task => task.assignedTo) };
+      case 'technician':
+        return { ...baseData, tasks: this.mockTasks.filter(task => task.assignedTo === 'Jean Dupont' || !task.assignedTo), teamMembers: undefined };
+      default:
+        return baseData;
+    }
   }
+}
 
   // Récupérer les statistiques
   async getStats(_role: string): Promise<DashboardStats> {
