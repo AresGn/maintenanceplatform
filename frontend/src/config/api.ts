@@ -1,8 +1,8 @@
 // Configuration de l'API
 const getBaseUrl = () => {
-  // En production, utiliser l'URL du backend Vercel
+  // En production, utiliser l'URL du backend Railway
   if (import.meta.env.PROD) {
-    return 'https://maintenance-platform-backend.vercel.app';
+    return 'https://web-production-7357.up.railway.app';
   }
   // En développement, utiliser l'URL locale ou la variable d'environnement
   return import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
