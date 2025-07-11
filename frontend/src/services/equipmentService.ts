@@ -14,18 +14,25 @@ import {
 class EquipmentService {
   // Équipements
   async getEquipments(filters?: EquipmentFilter & { skip?: number; limit?: number }) {
-    const params = new URLSearchParams();
+    try {
+      const params = new URLSearchParams();
 
-    if (filters) {
-      Object.entries(filters).forEach(([key, value]) => {
-        if (value !== undefined && value !== null && value !== '') {
-          params.append(key, value.toString());
-        }
-      });
+      if (filters) {
+        Object.entries(filters).forEach(([key, value]) => {
+          if (value !== undefined && value !== null && value !== '') {
+            params.append(key, value.toString());
+          }
+        });
+      }
+
+      console.log('Fetching equipment from:', `/api/equipment?${params.toString()}`);
+      const response = await apiService.get(`/api/equipment?${params.toString()}`);
+      console.log('Equipment response:', response);
+      return response as Equipment[];
+    } catch (error) {
+      console.error('Error fetching equipment:', error);
+      throw error;
     }
-
-    const response = await apiService.get(`/api/equipment?${params.toString()}`);
-    return response as Equipment[];
   }
 
   async getEquipment(id: number) {

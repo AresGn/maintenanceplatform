@@ -100,14 +100,14 @@ class DashboardService {
   async getDashboardData(role: string): Promise<DashboardData> {
     try {
       // Récupérer les vraies statistiques depuis l'API
-      const stats = await apiService.get(`${API_CONFIG.ENDPOINTS.DASHBOARD}/stats`);
+      const stats = await apiService.get(`${API_CONFIG.ENDPOINTS.DASHBOARD}/stats`) as any;
 
       const baseData: DashboardData = {
         stats: {
-          equipments: stats.total_equipment || 0,
-          maintenances: stats.pending_maintenances || 0,
+          equipments: stats?.total_equipment || 0,
+          maintenances: stats?.pending_maintenances || 0,
           alerts: 3, // TODO: implémenter dans l'API
-          interventions: stats.completed_maintenances || 0,
+          interventions: stats?.completed_maintenances || 0,
           availability: 94.5, // TODO: calculer depuis l'API
           mtbf: 720, // TODO: calculer depuis l'API
           mttr: 2.5 // TODO: calculer depuis l'API

@@ -5,7 +5,9 @@ const getBaseUrl = () => {
     return 'https://web-production-7357.up.railway.app';
   }
   // En développement, utiliser l'URL locale ou la variable d'environnement
-  return import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+  const devUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+  console.log('API Base URL:', devUrl, 'PROD:', import.meta.env.PROD);
+  return devUrl;
 };
 
 export const API_CONFIG = {
