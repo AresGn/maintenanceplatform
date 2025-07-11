@@ -2,7 +2,7 @@
 const getBaseUrl = () => {
   // En production, utiliser l'URL du backend Vercel
   if (import.meta.env.PROD) {
-    return 'https://maintenanceplatform-frontend-luor.vercel.app';
+    return 'https://maintenance-platform-backend.vercel.app';
   }
   // En développement, utiliser l'URL locale ou la variable d'environnement
   return import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';

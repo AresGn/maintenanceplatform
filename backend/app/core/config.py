@@ -26,8 +26,7 @@ class Settings(BaseSettings):
     ALLOWED_ORIGINS: list = [
         "http://localhost:5173",
         "http://localhost:3000",
-        "https://maintenanceplatform-frontend.vercel.app",
-        "https://maintenanceplatform-frontend-luor.vercel.app"
+        "https://maintenanceplatform-frontend.vercel.app"
     ]
 
     class Config:
