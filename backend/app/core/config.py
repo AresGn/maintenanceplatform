@@ -23,7 +23,11 @@ class Settings(BaseSettings):
     DEBUG: Optional[bool] = True
 
     # CORS
-    ALLOWED_ORIGINS: list = ["http://localhost:5173", "http://localhost:3000"]
+    ALLOWED_ORIGINS: list = [
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://maintenanceplatform-frontend.vercel.app/"
+    ]
 
     class Config:
         env_file = ".env"

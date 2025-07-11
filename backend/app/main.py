@@ -22,7 +22,7 @@ app.add_middleware(
 )
 
 # Inclure les routes d'authentification
-app.include_router(auth_router, prefix="/auth", tags=["authentication"])
+app.include_router(auth_router, prefix="/api/auth", tags=["authentication"])
 
 # Inclure les routes pour les équipements
 app.include_router(sites_router, prefix="/api/v1/sites", tags=["sites"])
