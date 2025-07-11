@@ -22,7 +22,7 @@ export const API_CONFIG = {
     },
     USERS: '/users',
     EQUIPMENT: '/api/equipment',
-    MAINTENANCE: '/maintenance',
+    MAINTENANCE: '/api/v1/maintenance',
     INVENTORY: '/inventory',
     DASHBOARD: '/api/dashboard',
     SITES: '/api/sites'
