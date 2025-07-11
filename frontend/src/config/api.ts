@@ -12,7 +12,7 @@ export const API_CONFIG = {
   BASE_URL: getBaseUrl(),
   ENDPOINTS: {
     AUTH: {
-      LOGIN: '/api/auth/login',
+      LOGIN: '/api/auth/login-json',
       REGISTER: '/api/auth/register',
       LOGOUT: '/api/auth/logout',
       REFRESH: '/api/auth/refresh',

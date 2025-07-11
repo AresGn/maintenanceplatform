@@ -52,14 +52,10 @@ class AuthService {
   // Connexion
   async login(credentials: LoginRequest): Promise<AuthResponse> {
     try {
-      // Préparer les données pour l'API FastAPI (form-data)
-      const formData = new FormData();
-      formData.append('username', credentials.username);
-      formData.append('password', credentials.password);
-
-      const backendResponse = await apiService.postFormData<BackendAuthResponse>(
+      // Envoyer les données en JSON
+      const backendResponse = await apiService.post<BackendAuthResponse>(
         API_CONFIG.ENDPOINTS.AUTH.LOGIN,
-        formData
+        credentials
       );
 
       // Transformer la réponse du backend
