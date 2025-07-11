@@ -25,7 +25,8 @@ export const API_CONFIG = {
     MAINTENANCE: '/api/v1/maintenance',
     INVENTORY: '/inventory',
     DASHBOARD: '/api/dashboard',
-    SITES: '/api/sites'
+    SITES: '/api/sites',
+    PRODUCTION_LINES: '/api/production-lines'
   },
   TIMEOUT: 10000,
   RETRY_ATTEMPTS: 3
