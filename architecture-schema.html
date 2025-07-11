@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture - Plateforme de Maintenance</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .architecture {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .layer {
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .layer:hover {
+            transform: translateY(-5px);
+        }
+
+        .frontend {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left: 5px solid #2196f3;
+        }
+
+        .api {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-left: 5px solid #9c27b0;
+        }
+
+        .database {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+            border-left: 5px solid #4caf50;
+        }
+
+        .external {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffcc80 100%);
+            border-left: 5px solid #ff9800;
+        }
+
+        .layer-title {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .layer-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: white;
+        }
+
+        .frontend .layer-icon { background: #2196f3; }
+        .api .layer-icon { background: #9c27b0; }
+        .database .layer-icon { background: #4caf50; }
+        .external .layer-icon { background: #ff9800; }
+
+        .components {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .component-group {
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .component-group h4 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+        }
+
+        .component-list {
+            list-style: none;
+        }
+
+        .component-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .component-list li:last-child {
+            border-bottom: none;
+        }
+
+        .component-list li::before {
+            content: "▶";
+            color: #666;
+            margin-right: 8px;
+            font-size: 0.8em;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tech-badge {
+            background: rgba(0,0,0,0.1);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .flow-arrows {
+            text-align: center;
+            font-size: 2em;
+            color: #666;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .components {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .architecture {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏭 Architecture de la Plateforme de Maintenance</h1>
+            <p>Système de gestion de maintenance industrielle moderne</p>
+        </div>
+
+        <div class="architecture">
+            <!-- Frontend Layer -->
+            <div class="layer frontend">
+                <div class="layer-title">
+                    <div class="layer-icon">⚛️</div>
+                    Frontend - React TypeScript
+                </div>
+                <div class="components">
+                    <div class="component-group">
+                        <h4>🔐 Authentification</h4>
+                        <ul class="component-list">
+                            <li>Page de connexion</li>
+                            <li>Page d'inscription</li>
+                            <li>Gestion des rôles</li>
+                            <li>Protection des routes</li>
+                        </ul>
+                    </div>
+                    <div class="component-group">
+                        <h4>📊 Dashboards</h4>
+                        <ul class="component-list">
+                            <li>Dashboard Admin</li>
+                            <li>Dashboard Superviseur</li>
+                            <li>Dashboard Technicien</li>
+                            <li>Métriques temps réel</li>
+                        </ul>
+                    </div>
+                    <div class="component-group">
+                        <h4>⚙️ Gestion Équipements</h4>
+                        <ul class="component-list">
+                            <li>Liste des équipements</li>
+                            <li>Détails équipement</li>
+                            <li>Création/Édition</li>
+                            <li>Historique maintenance</li>
+                        </ul>
+                    </div>
+                    <div class="component-group">
+                        <h4>🔧 Maintenance</h4>
+                        <ul class="component-list">
+                            <li>Calendrier maintenance</li>
+                            <li>Planification</li>
+                            <li>Détails interventions</li>
+                            <li>Suivi des tâches</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-badge">React 18</span>
+                    <span class="tech-badge">TypeScript</span>
+                    <span class="tech-badge">Ant Design</span>
+                    <span class="tech-badge">React Router</span>
+                    <span class="tech-badge">Vite</span>
+                </div>
+            </div>
+
+            <div class="flow-arrows">⬇️</div>
+
+            <!-- API Layer -->
+            <div class="layer api">
+                <div class="layer-title">
+                    <div class="layer-icon">🚀</div>
+                    API - FastAPI Python
+                </div>
+                <div class="components">
+                    <div class="component-group">
+                        <h4>🛣️ Endpoints</h4>
+                        <ul class="component-list">
+                            <li>/auth/* - Authentification</li>
+                            <li>/api/v1/equipment/* - Équipements</li>
+                            <li>/api/v1/maintenance/* - Maintenance</li>
+                            <li>/api/v1/sites/* - Sites</li>
+                        </ul>
+                    </div>
+                    <div class="component-group">
+                        <h4>🔒 Sécurité & Core</h4>
+                        <ul class="component-list">
+                            <li>Authentification JWT</li>
+                            <li>Gestion des rôles</li>
+                            <li>Configuration CORS</li>
+                            <li>Connexion base de données</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-badge">FastAPI</span>
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">SQLAlchemy</span>
+                    <span class="tech-badge">JWT</span>
+                    <span class="tech-badge">Pydantic</span>
+                </div>
+            </div>
+
+            <div class="flow-arrows">⬇️</div>
+
+            <!-- Database Layer -->
+            <div class="layer database">
+                <div class="layer-title">
+                    <div class="layer-icon">🗄️</div>
+                    Base de Données - PostgreSQL (Neon)
+                </div>
+                <div class="components">
+                    <div class="component-group">
+                        <h4>👥 Utilisateurs & Sites</h4>
+                        <ul class="component-list">
+                            <li>users - Utilisateurs</li>
+                            <li>sites - Sites industriels</li>
+                            <li>production_lines - Lignes</li>
+                        </ul>
+                    </div>
+                    <div class="component-group">
+                        <h4>⚙️ Équipements & Maintenance</h4>
+                        <ul class="component-list">
+                            <li>equipment - Équipements</li>
+                            <li>maintenance_plans - Plans</li>
+                            <li>maintenance_tasks - Tâches</li>
+                            <li>maintenance_interventions</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-badge">PostgreSQL</span>
+                    <span class="tech-badge">Neon</span>
+                    <span class="tech-badge">Alembic</span>
+                </div>
+            </div>
+
+            <div class="flow-arrows">⬇️</div>
+
+            <!-- External Services -->
+            <div class="layer external">
+                <div class="layer-title">
+                    <div class="layer-icon">☁️</div>
+                    Services Externes & Déploiement
+                </div>
+                <div class="components">
+                    <div class="component-group">
+                        <h4>🌐 Hébergement</h4>
+                        <ul class="component-list">
+                            <li>Vercel - Frontend & API</li>
+                            <li>Neon - Base de données</li>
+                            <li>GitHub - Code source</li>
+                        </ul>
+                    </div>
+                    <div class="component-group">
+                        <h4>🔧 Outils</h4>
+                        <ul class="component-list">
+                            <li>CI/CD automatique</li>
+                            <li>Variables d'environnement</li>
+                            <li>Monitoring</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-badge">Vercel</span>
+                    <span class="tech-badge">GitHub</span>
+                    <span class="tech-badge">Neon</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
