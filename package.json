@@ -10,12 +10,12 @@
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:frontend": "cd frontend && npm run dev",
     "dev:backend": "cd backend && python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000",
-    "build": "cd frontend && npm run build",
-    "install:frontend": "cd frontend && npm install",
-    "install:all": "npm install && cd frontend && npm install",
-    "test": "cd frontend && npm run test",
+    "build": "npm --prefix frontend run build",
+    "install:frontend": "npm --prefix frontend install",
+    "install:all": "npm install && npm --prefix frontend install",
+    "test": "npm --prefix frontend run test",
     "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
-    "start:frontend": "cd frontend && npm run preview",
+    "start:frontend": "npm --prefix frontend run preview",
     "start:backend": "cd backend && python -m uvicorn app.main:app --host 0.0.0.0 --port 8000"
   },
   "devDependencies": {
