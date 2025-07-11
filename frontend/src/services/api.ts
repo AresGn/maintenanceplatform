@@ -55,8 +55,15 @@ class ApiService {
 
   // Méthodes HTTP génériques
   async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
-    const response = await this.api.get<T>(url, config);
-    return response.data;
+    try {
+      console.log('API GET request to:', url);
+      const response = await this.api.get<T>(url, config);
+      console.log('API GET response:', response.status, url);
+      return response.data;
+    } catch (error) {
+      console.error('API GET error:', url, error);
+      throw error;
+    }
   }
 
   async post<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
