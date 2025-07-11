@@ -100,6 +100,9 @@ Si Vercel pose des problèmes avec le backend Python:
 
 ## 🚨 Problèmes Courants
 
+### Erreur "cd: frontend: No such directory"
+**Solution appliquée**: Utiliser `rootDirectory: "frontend"` dans vercel.json au lieu de `cd frontend &&` dans les commandes.
+
 ### CORS Errors
 ```javascript
 // Si erreurs CORS, vérifier la configuration backend
