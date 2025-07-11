@@ -1,13 +1,22 @@
 // Configuration de l'API
+const getBaseUrl = () => {
+  // En production, utiliser l'URL du backend Vercel
+  if (import.meta.env.PROD) {
+    return 'https://maintenanceplatform-frontend-luor.vercel.app';
+  }
+  // En développement, utiliser l'URL locale ou la variable d'environnement
+  return import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+};
+
 export const API_CONFIG = {
-  BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000',
+  BASE_URL: getBaseUrl(),
   ENDPOINTS: {
     AUTH: {
-      LOGIN: '/auth/login',
-      REGISTER: '/auth/register',
-      LOGOUT: '/auth/logout',
-      REFRESH: '/auth/refresh',
-      ME: '/auth/me'
+      LOGIN: '/api/auth/login',
+      REGISTER: '/api/auth/register',
+      LOGOUT: '/api/auth/logout',
+      REFRESH: '/api/auth/refresh',
+      ME: '/api/auth/me'
     },
     USERS: '/users',
     EQUIPMENT: '/equipment',
